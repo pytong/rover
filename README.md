@@ -48,4 +48,8 @@ MMRMMRMRRM
 
 Expected Output:  
 1 3 N  
-5 1 E  
+5 1 E
+
+***RUN COMMAND***
+(Enter your rover instructions in data/input.txt)
+ruby app/models/rover_mover.rb

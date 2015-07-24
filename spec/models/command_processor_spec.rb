@@ -5,10 +5,11 @@ require_relative "../../app/models/orientation"
 require_relative "../../app/models/command_processor"
 
 describe "CommandProcessor" do
-  subject(:command_processor) { CommandProcessor.new }
 
   describe "set_max_coordinates" do
     let(:line) {"5 5"}
+
+    subject(:command_processor) { CommandProcessor.new }
 
     before { command_processor.set_max_coordinates(line) }
 
@@ -21,6 +22,8 @@ describe "CommandProcessor" do
       "1 2 N\nLMLMLMLMM"
     }
 
+    subject(:command_processor) { CommandProcessor.new }
+
     it "should return final rover coordinates and orientation" do
       expect(command_processor.execute_instruction(lines)).to eq("1 3 N")
     end
@@ -28,11 +31,13 @@ describe "CommandProcessor" do
 
   describe "execute_all" do
     let(:lines) {
-      "1 2 N\nLMLMLMLMM\n3 3 E\nMMRMMRMRRM"
+      "5 5\n1 2 N\nLMLMLMLMM\n3 3 E\nMMRMMRMRRM"
     }
 
+    subject(:command_processor) { CommandProcessor.new({commands: lines}) }
+
     it "should return final rover coordinates and orientation for all rovers" do
-      expect(command_processor.execute_all(lines)).to eq("1 3 N\n5 1 E\n")
+      expect(command_processor.execute_all).to eq("1 3 N\n5 1 E\n")
     end
   end
 end

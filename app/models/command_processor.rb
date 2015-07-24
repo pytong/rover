@@ -2,6 +2,10 @@ class CommandProcessor
   attr_reader :max_x
   attr_reader :max_y
 
+  def initialize(attrs = {})
+    @commands = attrs[:commands]
+  end
+
   def set_max_coordinates(line)
     @max_x, @max_y = line.split(" ")
   end
@@ -26,10 +30,13 @@ class CommandProcessor
     "#{rover.x} #{rover.y} #{rover.orientation}"
   end
 
-  def execute_all(lines)
+  def execute_all
     result = ""
 
-    instructions = lines.split("\n")
+    instructions = @commands.split("\n")
+
+    set_max_coordinates(instructions.shift)
+
     while !instructions.empty? do
       instruction = "#{instructions.shift}\n"
       instruction << instructions.shift
