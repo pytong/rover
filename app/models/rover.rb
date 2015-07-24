@@ -5,9 +5,9 @@ class Rover
   attr_reader :y
 
   def initialize(attrs = {})
-    @orientation = attrs[:orientation]
-    @x = attrs[:x]
-    @y = attrs[:y]
+    @orientation = attrs[:orientation].to_sym
+    @x = attrs[:x].to_i
+    @y = attrs[:y].to_i
   end
 
   def move
@@ -25,8 +25,8 @@ class Rover
 
   def spin(direction)
     rotate_by = (direction == Direction.left ? -1 : 1)
-
     current_orientation_index = Orientation.all.index(@orientation)
+
     @orientation = Orientation.all.rotate(current_orientation_index).rotate(rotate_by)[0]
   end
 

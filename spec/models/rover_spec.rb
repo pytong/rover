@@ -1,10 +1,10 @@
-require_relative "../spec_helper.rb"
+require_relative "../spec_helper"
 require_relative "../../app/models/rover"
 require_relative "../../app/models/direction"
 require_relative "../../app/models/orientation"
 
 describe "Rover" do
-  context "Spin Left" do
+  describe "Spin Left" do
     before do
       @spin_direction = Direction.left
     end
@@ -34,7 +34,7 @@ describe "Rover" do
     end
   end
 
-  context "Spin Right" do
+  describe "Spin Right" do
     before do
       @spin_direction = Direction.right
     end
@@ -64,7 +64,7 @@ describe "Rover" do
     end
   end
 
-  context "Move" do
+  describe "Move" do
     context "current orientation is East" do
       subject(:rover) { Rover.new({x: 0, y: 0, orientation: Orientation.east}) }
       it "should increment x by 1" do

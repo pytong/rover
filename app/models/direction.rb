@@ -1,9 +1,9 @@
 class Direction
   def self.left
-    :LEFT
+    :L
   end
 
   def self.right
-    :RIGHT
+    :R
   end
 end

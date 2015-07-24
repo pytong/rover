@@ -5,18 +5,18 @@ class Orientation
   end
 
   def self.east
-    :EAST
+    :E
   end
 
   def self.south
-    :SOUTH
+    :S
   end
 
   def self.west
-    :WEST
+    :W
   end
 
   def self.north
-    :NORTH
+    :N
   end
 end
