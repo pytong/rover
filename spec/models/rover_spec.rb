@@ -1,12 +1,12 @@
 require_relative "../spec_helper"
 require_relative "../../app/models/rover"
-require_relative "../../app/models/direction"
+require_relative "../../app/models/operation"
 require_relative "../../app/models/orientation"
 
 describe "Rover" do
   describe "Spin Left" do
     before do
-      @spin_direction = Direction.left
+      @spin_direction = Operation.left
     end
 
     context "current orientation is East" do
@@ -36,7 +36,7 @@ describe "Rover" do
 
   describe "Spin Right" do
     before do
-      @spin_direction = Direction.right
+      @spin_direction = Operation.right
     end
 
     context "current orientation is East" do

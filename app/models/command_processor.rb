@@ -3,11 +3,26 @@ class CommandProcessor
   attr_reader :max_y
 
   def initialize(attrs = {})
-    @commands = attrs[:commands]
+    instructions = attrs[:commands].split("\n")
+    set_max_coordinates(instructions.shift)
+    @commands = instructions
   end
 
   def set_max_coordinates(line)
-    @max_x, @max_y = line.split(" ")
+    @max_x, @max_y = line.split(" ").map(&:to_i)
+  end
+
+  def move_allowed?(rover)
+    case rover.orientation
+    when Orientation.east
+      rover.x < @max_x
+    when Orientation.south
+      rover.y > 0
+    when Orientation.west
+      rover.x > 0
+    when Orientation.north
+      rover.y < @max_y
+    end
   end
 
   def execute_instruction(lines)
@@ -18,24 +33,21 @@ class CommandProcessor
 
     instructions.split("").each do |instruction|
       case instruction.to_sym
-      when Direction.left
-        rover.spin(Direction.left)
-      when Direction.right
-        rover.spin(Direction.right)
-      when :M
-        rover.move
+      when Operation.left
+        rover.spin(Operation.left)
+      when Operation.right
+        rover.spin(Operation.right)
+      when Operation.move
+        rover.move if move_allowed?(rover)
       end
     end
 
     "#{rover.x} #{rover.y} #{rover.orientation}"
   end
 
-  def execute_all
+  def execute
     result = ""
-
-    instructions = @commands.split("\n")
-
-    set_max_coordinates(instructions.shift)
+    instructions = @commands
 
     while !instructions.empty? do
       instruction = "#{instructions.shift}\n"

@@ -23,8 +23,8 @@ class Rover
     end
   end
 
-  def spin(direction)
-    rotate_by = (direction == Direction.left ? -1 : 1)
+  def spin(operation)
+    rotate_by = (operation == Operation.left ? -1 : 1)
     current_orientation_index = Orientation.all.index(@orientation)
 
     @orientation = Orientation.all.rotate(current_orientation_index).rotate(rotate_by)[0]
